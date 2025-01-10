@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  apache:
+    image: httpd:latest
+    container_name: apache-A
+    ports:
+      - "80:80"
+    volumes:
+      - ./site:/usr/local/apache2/htdocs/
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: my_database
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD: my_password
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
